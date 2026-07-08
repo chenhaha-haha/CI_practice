@@ -52,4 +52,8 @@ class AppsService:
                 )
 
             app_config_bak.append(new_config)
+
+        print(
+            "this is method get_factory_apps_service of AppsService in app/features/apps/service.py"
+        )
         return app_config_bak

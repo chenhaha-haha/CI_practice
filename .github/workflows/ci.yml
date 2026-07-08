@@ -27,7 +27,15 @@ jobs:
           pipenv install --dev # 👈 確保有裝到 pytest、pandas 等套件
 
       - name: 🚨 4. 執行自動化測試 (Pytest)
+        env:
+          ENV: "development"
+          APP_A_LATEST_VERSION: "2.7.6"
+          APP_B_LATEST_VERSION: "2.4.5"
+          HOST: "127.0.0.1"
+          PORT: "8000"
+          SQLITE_PHONE_DB: "test.db"
         run: |
           # 執行你寫的 Router 測試與 Service 測試
           # 因為我們在測試中完美使用了 Mock，所以這裡「完全不需要真實資料庫」也能跑！
-          pipenv run pytest -v
+          mkdir -p data/db
+          PYTHONPATH=. pipenv run pytest -v
