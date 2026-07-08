@@ -1,0 +1,7 @@
+*.bat
+package
+requirements.txt
+.env
+data/
+__pycache__/
+*.pyc
