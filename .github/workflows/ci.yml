@@ -33,7 +33,7 @@ jobs:
           APP_B_LATEST_VERSION: "2.4.5"
           HOST: "127.0.0.1"
           PORT: "8000"
-          SQLITE_PHONE_DB: "sqlite:////tmp/test.db"
+          SQLITE_PHONE_DB: ":memory:"
         run: |
           # 執行你寫的 Router 測試與 Service 測試
           # 因為我們在測試中完美使用了 Mock，所以這裡「完全不需要真實資料庫」也能跑！
