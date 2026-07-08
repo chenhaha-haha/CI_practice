@@ -2,6 +2,6 @@
 package
 requirements.txt
 .env
-data/
+data/logs/
 __pycache__/
 *.pyc
