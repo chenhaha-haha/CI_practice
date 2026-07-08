@@ -1,0 +1,33 @@
+# .github/workflows/ci.yml
+name: FastAPI Continuous Integration
+
+# 觸發時機：當 main 分支有 push，或者有人對 main 提 Pull Request 時
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test-and-verify:
+    runs-on: ubuntu-latest # 使用 GitHub 提供的全新乾淨 Ubuntu 環境
+
+    steps:
+      - name: 📥 1. 複製專案程式碼
+        uses: actions/checkout@v4
+
+      - name: 🐍 2. 設定 Python 環境
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10" # 👈 請改成你專案實際使用的 Python 版本
+
+      - name: 📦 3. 安裝 Pipenv 與所有依賴
+        run: |
+          pip install pipenv
+          pipenv install --dev # 👈 確保有裝到 pytest、pandas 等套件
+
+      - name: 🚨 4. 執行自動化測試 (Pytest)
+        run: |
+          # 執行你寫的 Router 測試與 Service 測試
+          # 因為我們在測試中完美使用了 Mock，所以這裡「完全不需要真實資料庫」也能跑！
+          pipenv run pytest -v
