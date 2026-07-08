@@ -23,6 +23,9 @@ class Settings(BaseSettings):
     # 💡 額外提供一個屬性，自動組合成絕對路徑
     @property
     def sqlite_absolute_path(self) -> str:
+        if self.SQLITE_PHONE_DB == ":memory:":
+            return ":memory:"
+
         db_path = Path(self.SQLITE_PHONE_DB)
 
         # 如果是絕對路徑就直接返回，如果是相對路徑就與 BASE_DIR 拼接
